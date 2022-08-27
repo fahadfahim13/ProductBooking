@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.children {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+

@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation Page Testing Navigation Bar Testing should match navigation bar snapshot 1`] = `
+<Menu
+  className="menuContainer"
+  mode="horizontal"
+/>
+`;

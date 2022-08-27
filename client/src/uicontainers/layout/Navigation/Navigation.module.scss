@@ -1,0 +1,52 @@
+$navigation-background-color: #fff;
+$text-color: white;
+
+.menuContainer {
+  width: 50%;
+  background-color: $navigation-background-color;
+  border-bottom-color: $navigation-background-color;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.navigationContainer {
+  background-color: $navigation-background-color;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: $text-color;
+}
+
+.logoContainer {
+  width: 20%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+.buttonsContainer {
+  display: flex;
+  width: 30%;
+  justify-content: space-evenly;
+}
+
+.whiteButton {
+  color: #fff;
+}
+
+.navButton {
+  color: $text-color;
+  background-color: $navigation-background-color;
+  margin-right: 5%;
+  border: none;
+}
+
+.loginButton {
+  @extend .navButton;
+  border: 1px solid $text-color;
+  display: flex;
+  align-items: center;
+}

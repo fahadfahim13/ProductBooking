@@ -1,0 +1,11 @@
+.searchInput {
+    width: 384px;
+    max-height: 50px;
+    background: #E5E5E5;
+    border-radius: 5px;
+    right: 0;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  
