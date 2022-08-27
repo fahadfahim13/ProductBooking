@@ -12,10 +12,7 @@ export const Header = () => {
     navigate(ROUTES.PATHS.ROOT, { replace: true });
   };
 
-  return (
-    <Layout.Header className={styles.headerStyle}>
-    </Layout.Header>
-  );
+  return <Layout.Header className={styles.headerStyle}></Layout.Header>;
 };
 
 export default Header;
