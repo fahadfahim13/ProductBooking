@@ -8,4 +8,5 @@ export interface Props {
     vertical?: `${VERTICAL}`;
     horizontal?: `${HORIZONTAL}`;
     onClose: (event: SyntheticEvent | MouseEvent) => void;
+    severity: "error" | "warning" | "info" | "success";
 }

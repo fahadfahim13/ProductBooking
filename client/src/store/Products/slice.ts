@@ -1,11 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { fetchAllProductsAsync } from './thunks';
-import { ProductState } from './types';
+import { ProductResponse, ProductState } from './types';
 
 const initialState: ProductState = {
   data: [],
   status: 'idle',
+  selectedProductForBooking: null,
+  selectedProductForReturn: null,
+  bookedProducts: [],
 };
 
 export const productSlice = createSlice({
@@ -16,6 +19,17 @@ export const productSlice = createSlice({
     resetProducts: (state) => {
       state.data = [];
       state.status = 'idle';
+    },
+    selectProductForBooking: (state, action: PayloadAction<ProductResponse>) => {
+      state.selectedProductForBooking = action.payload;
+    },
+    selectProductForReturn: (state, action: PayloadAction<ProductResponse>) => {
+      state.selectedProductForReturn = action.payload;
+    },
+    bookProduct: (state, action: PayloadAction<ProductResponse>) => {
+      const tempBookedProducts = state.bookedProducts;
+      tempBookedProducts.push(action.payload);
+      state.bookedProducts = tempBookedProducts;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -28,6 +42,7 @@ export const productSlice = createSlice({
       .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.data = action.payload.data;
+        state.selectedProductForBooking = action.payload.data.filter((p: ProductResponse) => p.availability)[0];
       });
   },
 });

@@ -1,22 +1,21 @@
 import React from 'react';
-import dayjs, { Dayjs } from 'dayjs';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import moment, { Moment } from 'moment';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider, DatePicker as MaterialDatePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
+import { DatePickerProps } from './types';
 
 
-const DatePicker = (props: {label: string}) => {
-    const [value, setValue] = React.useState<Dayjs | null>(dayjs());
-    const { label } = props;
+const DatePicker = (props: DatePickerProps ) => {
+    const { label, minDate, value, onChange } = props;
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <MaterialDatePicker
         label={label}
         value={value}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
+        onChange={onChange}
         renderInput={(params) => <TextField {...params} />}
+        minDate={minDate}
       />
     </LocalizationProvider>
   )

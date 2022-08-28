@@ -1,30 +1,28 @@
 import * as React from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Box, FormControl, InputLabel, MenuItem } from '@mui/material';
-import { ProductResponse } from 'store/Products/types';
+import { ProductSelectionProps } from './types';
+import { useAppSelector } from 'store/hooks';
+import { selectedProductForBooking } from 'store/Products/selectors';
 
-const ProductSelectionComponent = (props: {products: ProductResponse[]}) => {
-  const [age, setAge] = React.useState('');
+const ProductSelectionComponent = (props: ProductSelectionProps) => {
+  const { products, handleChange } = props;
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
-
-  const { products } = props;
+  const selectedProduct = useAppSelector(selectedProductForBooking);
 
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Select Product</InputLabel>
-        <Select
+        {selectedProduct && <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
+          value={selectedProduct.code}
           label="Select Product"
           onChange={handleChange}
         >
-          {products.map((product) => <MenuItem value={product.id}> {product.name} / {product.code} </MenuItem>)}
-        </Select>
+          {products.map((product) => <MenuItem value={product.code}> {product.name} / {product.code} </MenuItem>)}
+        </Select>}
       </FormControl>
     </Box>
   );

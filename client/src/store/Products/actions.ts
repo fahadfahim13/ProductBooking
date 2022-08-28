@@ -1,4 +1,4 @@
 import productSlice from './slice';
 
-const { resetProducts } = productSlice.actions;
-export { resetProducts };
+const { resetProducts, selectProductForBooking, selectProductForReturn, bookProduct } = productSlice.actions;
+export { resetProducts, selectProductForBooking, selectProductForReturn, bookProduct };

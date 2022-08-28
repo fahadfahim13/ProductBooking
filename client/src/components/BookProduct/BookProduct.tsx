@@ -2,9 +2,15 @@ import React from 'react';
 import { Backdrop, Box, Fade, Modal, Typography } from '@mui/material'
 import ActionButton from 'components/ActionButton'
 import ProductSelectionComponent from 'components/ProductSelectionComponent';
-import { useAppSelector } from 'store/hooks';
-import { selectProducts } from 'store/Products/selectors';
-import DateRangeSelector from 'components/DateRangeSelector/DateRangeSelector';
+import DateRangeSelector from 'components/DateRangeSelector';
+import { BookProductProps } from './types';
+import { Button, Col, Row } from 'antd';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { selectedProductForBooking } from 'store/Products/selectors';
+import { bookProduct } from 'store/Products/actions';
+import { handleMessage, handleOpenClose } from 'store/Alert/actions';
+import Alert from 'components/Alert';
+import { selectAlertProp } from 'store/Alert/selectors';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -18,13 +24,20 @@ const style = {
     p: 4,
   };
 
-const BookProduct = () => {
-    const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const BookProduct = (props: BookProductProps) => {
+  const {open, handleOpen, handleClose, products, handleProductChange, dateRangeState, onDateFromChange, onDateToChange} = props;
+  const selectedProduct = useAppSelector(selectedProductForBooking);
+  const dispatch = useAppDispatch();
+  const alert = useAppSelector(selectAlertProp);
 
-  const products = useAppSelector(selectProducts);
-
+  const onSubmit = () => {
+    if(selectedProduct) {
+      dispatch(bookProduct(selectedProduct));
+      dispatch(handleOpenClose(true));
+      dispatch(handleMessage("Product Booked"));
+    }
+    handleClose();
+  }
   return (
     <div>
         <ActionButton color="success" value="Book Product" onClick={handleOpen} />
@@ -45,12 +58,20 @@ const BookProduct = () => {
               Book Product
             </Typography>
             <br />
-            <ProductSelectionComponent products={products.filter((p) => p.availability)} />
+            <ProductSelectionComponent products={products} handleChange={handleProductChange} />
             <br />
-            <DateRangeSelector />
+            <DateRangeSelector dateRangeState={dateRangeState} onDateFromChange={onDateFromChange} onDateToChange={onDateToChange} />
+            <br />
+            <Row>
+              <Col span={11}></Col>
+              <Col span={6}><Button onClick={onSubmit} type="primary">Confirm</Button></Col>
+              <Col span={1}></Col>
+              <Col span={6}><Button onClick={handleClose}>Cancel</Button></Col>
+            </Row>
           </Box>
         </Fade>
       </Modal>
+      <Alert open={alert.open} message={alert.message} onClose={() => dispatch(handleOpenClose(false))} severity={'success'} />
     </div>
   )
 }

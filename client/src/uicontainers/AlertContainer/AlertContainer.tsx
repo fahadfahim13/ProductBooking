@@ -13,6 +13,7 @@ const AlertContainer = () => {
       open: alertProp.open,
       autoHideDuration: 3000,
       message: alertProp.message,
+      severity: 'success',
       onClose: () => {
         dispatch(handleOpenClose(false));
       },

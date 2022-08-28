@@ -18,4 +18,7 @@ export interface ProductResponse extends Product {
 export interface ProductState {
   status: 'idle' | 'pending' | 'success' | 'rejected';
   data: ProductResponse[];
+  selectedProductForBooking: ProductResponse | null;
+  bookedProducts: ProductResponse[];
+  selectedProductForReturn: ProductResponse | null;
 }
