@@ -21,7 +21,7 @@ const useBookProductLogic = () => {
 
   useEffect(() => {
     if(availableProducts) dispatch(selectProductForBooking(availableProducts[0]));
-  }, []);
+  }, [products]);
 
   const onProductSelect = (event: SelectChangeEvent) => {
     const productCode = event.target.value as string;
@@ -58,7 +58,8 @@ const useBookProductLogic = () => {
   }
   
   return { open, handleOpen, handleClose, 
-    products: availableProducts, 
+    products,
+    availableProducts, 
     dateRangeState, 
     onDateFromChange,
     onDateToChange,

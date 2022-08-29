@@ -1,14 +1,10 @@
 import * as React from 'react';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import { Box, FormControl, InputLabel, MenuItem } from '@mui/material';
 import { ProductSelectionProps } from './types';
-import { useAppSelector } from 'store/hooks';
-import { selectedProductForBooking } from 'store/Products/selectors';
 
 const ProductSelectionComponent = (props: ProductSelectionProps) => {
-  const { products, handleChange } = props;
-
-  const selectedProduct = useAppSelector(selectedProductForBooking);
+  const { products, selectedProduct, handleChange } = props;
 
   return (
     <Box sx={{ minWidth: 120 }}>

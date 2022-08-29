@@ -10,7 +10,4 @@ export interface BookProductProps {
     handleClose: () => void;
     products: ProductResponse[];
     handleProductChange: (e: SelectChangeEvent) => void;
-    dateRangeState: DateRangeState;
-    onDateFromChange: (newValue: Moment | null) => void;
-    onDateToChange: (newValue: Moment | null) => void;
 }

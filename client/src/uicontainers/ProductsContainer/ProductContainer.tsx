@@ -2,18 +2,29 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import BookProduct from 'components/BookProduct';
 import useBookProductLogic from 'components/BookProduct/useBookProductLogic';
+import ReturnProduct from 'components/ReturnProduct';
+import useReturnProductLogic from 'components/ReturnProduct/useReturnProductLogic';
 
 const ProductContainer = () => {
+  const {
+    open: openBook,
+    handleOpen: handleOpenBook,
+    handleClose: handleCloseBook,
+    products,
+    availableProducts: availableProductsForBooking,
+    dateRangeState: dateRangeStateForBooking,
+    handleProductChange: handleProductChangeForBooking,
+    onDateFromChange: onDateFromChangeForBooking,
+    onDateToChange: onDateToChangeForBooking,
+  } = useBookProductLogic();
+
   const {
     open,
     handleOpen,
     handleClose,
-    products,
-    dateRangeState,
+    availableProducts,
     handleProductChange,
-    onDateFromChange,
-    onDateToChange,
-  } = useBookProductLogic();
+  } = useReturnProductLogic();
 
   return (
     <div style={{ maxWidth: '100%' }}>
@@ -41,15 +52,26 @@ const ProductContainer = () => {
         }}
       />
       <BookProduct
+        open={openBook}
+        label={'Book Product'}
+        handleOpen={handleOpenBook}
+        handleClose={handleCloseBook}
+        products={availableProductsForBooking}
+        handleProductChange={handleProductChangeForBooking}
+        dateRangeState={dateRangeStateForBooking}
+        onDateFromChange={onDateFromChangeForBooking}
+        onDateToChange={onDateToChangeForBooking}
+      />
+
+      <ReturnProduct
         open={open}
+        label={'Return Product'}
         handleOpen={handleOpen}
         handleClose={handleClose}
-        products={products}
+        products={availableProducts}
         handleProductChange={handleProductChange}
-        dateRangeState={dateRangeState}
-        onDateFromChange={onDateFromChange}
-        onDateToChange={onDateToChange}
       />
+
     </div>
   );
 };

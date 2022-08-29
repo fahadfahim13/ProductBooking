@@ -30,6 +30,24 @@ export const productSlice = createSlice({
       const tempBookedProducts = state.bookedProducts;
       tempBookedProducts.push(action.payload);
       state.bookedProducts = tempBookedProducts;
+      state.data[action.payload.id-1] = {
+        ...state.data[action.payload.id-1],
+        availability: false,
+      }
+
+    },
+    returnProduct: (state, action: PayloadAction<ProductResponse>) => {
+      const tempBookedProducts = state.bookedProducts;
+      const tempBookedProductsIdx = state.bookedProducts.findIndex((p) => p.code === action.payload.code);
+      if(tempBookedProductsIdx){
+        tempBookedProducts.splice(tempBookedProductsIdx);
+        state.bookedProducts = tempBookedProducts;
+      }
+      state.data[action.payload.id-1] = {
+        ...state.data[action.payload.id-1],
+        availability: true,
+      }
+
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
