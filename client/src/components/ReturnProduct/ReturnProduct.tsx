@@ -38,6 +38,7 @@ const ReturnProduct = (props: BookProductProps) => {
     }
     handleClose();
   }
+
   return (
     <div>
         <ActionButton color="info" value={label} onClick={handleOpen} />
@@ -66,6 +67,7 @@ const ReturnProduct = (props: BookProductProps) => {
               <Col span={1}></Col>
               <Col span={6}><Button onClick={handleClose}>Cancel</Button></Col>
             </Row>
+            
           </Box>
         </Fade>
       </Modal>

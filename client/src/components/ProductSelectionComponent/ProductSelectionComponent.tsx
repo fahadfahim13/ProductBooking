@@ -10,15 +10,15 @@ const ProductSelectionComponent = (props: ProductSelectionProps) => {
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Select Product</InputLabel>
-        {selectedProduct && <Select
+        <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={selectedProduct.code}
+          value={selectedProduct ? selectedProduct.code : ''}
           label="Select Product"
           onChange={handleChange}
         >
           {products.map((product) => <MenuItem value={product.code}> {product.name} / {product.code} </MenuItem>)}
-        </Select>}
+        </Select>
       </FormControl>
     </Box>
   );
