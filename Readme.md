@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h2 align="center"> Movie hub application </h2>
+  <h2 align="center"> Product Booking application </h2>
 </div>
 
 ## Getting Started
